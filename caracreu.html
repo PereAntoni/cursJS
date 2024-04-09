@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercici 1: Joc cara creu</title>
+</head>
+<body>
+    <h1>JOC DEL CARA I CREU</h1>
+    <p>El jugador sempre té cara.</p>
+    <button onclick="tira()">Juga</button>
+    <p>El jugador1: <span id="jugador1"></span><span> guanyades</span></p>
+    <p>El jugador2: <span id="jugador2"></span><span> guanyades</span> </p>
+    
+
+<script>
+    var cares = 0;
+    var creus = 0;
+    tira();
+
+    function tira(){
+        var maxim = 2;
+        var minim = 1;
+        var caracreu = aleatori(1,2);
+        if (caracreu == 1){cares += 1;}
+        else{creus +=1;}
+        console.log("Cares:", cares);
+        console.log("Creus:", creus);
+        
+        document.getElementById("jugador1").innerText = cares;
+        document.getElementById("jugador2").innerText = creus;
+        
+
+    }
+
+
+    function aleatori(min,max){
+        var resultat = Math.floor(Math.random() * (max - min + 1) + min );
+        console.log("Ha sortit " + resultat);
+        return resultat;
+    }
+
+</script>
+</body>
+</html>
