@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercici 2: Una mosca volava per la llum</title>
+
+    
+</head>
+<body>
+    <h1>Exercici 2: Una mosca volava per la llum</h1>
+    <p></p>
+    <script>
+        //vocals a,e,i,o,u
+        var lletra ="Una mosca volava per la llum";
+        var vocals = ["a","e","i","o","u"];
+        
+        for (i of vocals){
+            console.log("Faig la vocal ",i, ": ")
+            console.log(substitueix(i));
+        }
+        
+        function substitueix(v){
+            l = lletra.toLowerCase();
+            for (i of vocals){
+                //console.log(i,v);
+                l=l.replaceAll(i,v);
+            }
+            return l;
+        }
+    </script>
+    
+</body>
+</html>
