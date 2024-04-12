@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercici 3. Equacions de segon grau</title>
+
+</head>
+<body>
+    <p>
+    Exercici 3. Equacions de segon grau
+    Crea un algorisme per a trobar totes les solucions de les equacions de segon
+    grau quan x2 es troba entre -5 i 5, x entre -3 i 3 i el terme independent entre 0 i 4.
+    La fórmula per a resoldre equacions de segon grau és la següent:
+    </p>
+    <script>
+        var b = -3;
+        var c=0;
+
+
+        function segonGrau(a,b,c){
+            var discriminant = Math.pow(b,2);
+            discriminant -= 4*a*c;
+            discriminant = Math.sqrt(discriminant);
+            var r1 = (-b + discriminant)/2*a
+            var r2 = (-b - discriminant)/2*a
+            if (isNaN(r1) && isNaN(r2)){
+                return "sense solució";
+            } else if(r1 === r2){
+                return r1;
+            } else{
+                return [r1,r2];
+            }
+
+        }
+
+        var MIN_A = -5;
+        var MAX_A = 5;
+        var MIN_B = -3;
+        var MAX_B = 3;
+        var MIN_C = 0;
+        var MAX_C = 4;
+        
+        for (var a=MIN_A;a<=MAX_A;a++){
+            for (var b=MIN_B;b<=MAX_B;b++){
+                for (var c=MIN_C;c<=MAX_C;c++){
+
+                    console.log("a:"+a,'b:'+b,"c:"+c,"R:"+segonGrau(a,b,c))
+                }
+            }
+            
+        }
+
+        
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasques cícliques</title>
+</head>
+<body>
+    <script>
+        function tasquesCicliques(persones, tasques, nCicles){
+            var resposta=[];
+            var nombreTasques = tasques.length;
+            var tasca;
+            
+            x = 0;
+            while (x<=nCicles){
+                //console.log("Cicle",x)
+                for (var i=0; i<persones.length;i++){
+                    //console.log("tasca",x%nombreTasques)
+                    //tasca = tasques[x%(nombreTasques + i)];
+                    tasca = (x + i)%(nombreTasques);
+                    //console.log("persona: " + persones[i], "tasca:" + tasques[tasca]);
+                    item = "cicle: "+ x + "," + persones[i] + "," + tasques[tasca];
+                    resposta.push(item);
+
+                }
+                x++;
+
+            }
+            return resposta;
+        }
+
+        var t =["rentar roba","estendre","cuina","baixar fems"];
+        var p =["pere","cati","guillem","roser"];
+        var c=15;
+        console.log("BENVINGUTS");
+        
+        familiaLliroBorne = tasquesCicliques(p,t,c);
+        for (var i=0;i<=familiaLliroBorne.length;i++){
+            console.log(familiaLliroBorne[i]);
+        }
+    </script>
+</body>
+</html>

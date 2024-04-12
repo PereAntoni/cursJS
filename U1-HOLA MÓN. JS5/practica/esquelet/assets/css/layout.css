@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+/*
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.montserrat-<uniquifier> {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: <weight>;
+    font-style: normal;
+  }
+  
+  .lobster-regular {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  */
+
+body{
+    background-image: url("../img/background/background11.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed;
+
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+li {
+    list-style: none;
+}
+
+a{
+  color: black;
+  text-decoration: none; 
+}
+
+h1 {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2,h3,h4,h5 {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+button {
+    background-color: #d32f2f;
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    box-shadow: 0 0 5px 0 black;
+    transition-duration: 0.8s;
+}
+
+button:hover {
+    background-color: #9a0079;
+    cursor: pointer;
+
+}
+
+#pianoDiv{
+    width: 1000px;
+}
+
+/* POSICIONAMENTS */
+
+header {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 25px; 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*width: 1000px;
+    justify-content: center;
+    flex-wrap: wrap;*/
+   
+}
+
+main #resultat {
+    width: 1000px;
+    background-color: white;
+    padding: 20px 10px;
+    border-radius: 10px;
+    margin: 25px 0 100px 0;
+}
+
+main #resultat>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+main #resultat ul{
+    display: flex;
+    flex-direction: column ;
+    align-items: center;
+}
+
+main #resultat li{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+}
+
+main #resultat ul li div:first-child{
+    display: flex;
+    flex-direction: column;
+    margin-right: 25px;
+}
+
+main #resultat h2 {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.lyrics{
+    cursor: pointer;
+    color: #b71c1c;
+}
