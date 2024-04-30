@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown</title>
+</head>
+<body onload="init()">
+<div id="app">
+
+</div>
+<script>
+var app = document.querySelector("#app");
+var temps;
+function init(){
+    //pintam escenari
+    console.log("init");
+    var entrada = document.createElement("input");
+        entrada.id="entrada";
+        app.appendChild(entrada);
+
+    var boto = document.createElement("button");
+        boto.innerHTML="pitja";
+        boto.addEventListener('click',activa);
+        app.appendChild(boto);
+
+    var div = document.createElement("DIV");
+        div.id='countdown';
+        div.style.textAlign='center';
+        app.appendChild(div);
+}
+
+function activa(){
+    var numero = parseInt(document.querySelector('#entrada').value);
+    var ara = new Date();
+
+    console.log("temps:" + ara);
+    var segons = document.querySelector("#entrada").value;
+    console.log(segons);
+
+    if(isNaN(numero)){
+        clearInterval(temps);
+        document.querySelector("#countdown").innerHTML="ERROR";
+    } else {
+        console.log("És un numero, activam compte enrrera a " + segons + " segons");
+        clearInterval(temps);
+        temps = setInterval(function(){
+            //ara conté l'hora en que s'ha executat la funció
+            //per primera vegada.
+            var ara2 = new Date();
+            var diff = Math.abs(ara2-ara);
+            //dataDiff ens permet contar els segons
+            var dataDiff = new Date(diff);
+            
+            if (numero - dataDiff.getSeconds()>0){
+                document.querySelector("#countdown").innerHTML = numero - dataDiff.getSeconds(); 
+            }
+            else{
+                clearInterval(temps);
+                document.querySelector("#countdown").innerHTML="SORPRESA!!";
+            }
+        },100);
+            /*clearInterval(temps);
+            temps = setInterval(function(){
+                var ara2 = new Date();
+                
+                console.log(dataDiff);*/
+            };
+    }
+    
+
+
+</script>
+</body>
+</html>

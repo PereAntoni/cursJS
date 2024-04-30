@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors Aleatoris</title>
+</head>
+<body>
+<button onclick="colorAleatori()">
+    Pitja
+</button>
+<label>Red</label>
+<input id="r">
+<label>Green</label>
+<input id="g">
+<label>Blue</label>
+<input id="b">
+
+<script>
+    function pintarFons(r,g,b){
+        var rParsed= parseInt(r);
+        var gParsed= parseInt(g);
+        var bParsed= parseInt(b);
+    }
+
+    document.querySelector("#r").addEventListener('input',function(){
+
+    });
+    
+    function intAleatori(max,min){
+        var resultat = Math.floor(Math.random() * (max - min + 1) + min );
+        console.log("Ha sortit " + resultat);
+        return resultat;    
+    }
+
+    function colorAleatori(){
+        var r = intAleatori(0,255);
+        var g = intAleatori(0,255);
+        var b = intAleatori(0,255);
+        document.querySelector("body").style.backgroundColor='rgb('+r+','+g+','+b+')';
+    }
+
+</script>
+    
+</body>
+</html>

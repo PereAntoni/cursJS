@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    function Lletra(valor,estat){
+        this.valor=valor;
+
+        //NO_SELECCIONAT, OK, KO
+        this.estat=estat;
+        this.jugar=function(){
+            penjat.jugar(valor);
+            penjat.pintar();
+        }
+        this.pintar=function (){
+            var nodeLletra = document.createElement("BUTTON");
+            nodeLletra.innerHTML=this.valor;
+            nodeLletra.style.margin='5px';
+            nodeLletra.addEventListener('click',this.jugar); //ALERTA! this.jugar NO this.jugar()
+
+            if(this.estat==="OK"){
+                nodeLletra.style.backgroundColor='green';
+                nodeLletra.style.color = 'white';
+                nodeLletra.disable=true;
+            } else if(this.estat==="KO"){
+                nodeLletra.style.backgroundColor='red';
+                nodeLletra.style.color = 'white';
+                nodeLletra.disable=true;
+            } else {
+                nodeLletra.style.backgroundColor='#CCCCCC';
+            }
+
+            return nodeLletra;
+        }
+    }
+
+    function Paraula(lletres){
+        this.lletres = lletres;
+        this.pintar=function(){
+            var result=[];
+            for(var i=0; i<this.lletres.length; i++){
+                if(this.lletres[i].estat==='OK'){
+                    result.push(this.lletres[i].valor);
+                } else {
+                    result.push("__");
+                }
+            }
+            return result.join(" ");
+        }
+    }
+    function randomInt(min, max){
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function Penjat(){
+        this.paraula;
+        this.lletres=[];
+
+        this.init=function(){
+            var lletres = "abcdefghijklmnopqrstuvwxyz".split("");
+            for(var i=0; i<lletres.length; i++){
+                var lletra = new Lletra(lletres[i],"NO_SELECCIONAT");
+                this.lletres.push(lletra);
+            }
+
+            var paraules = ["linux","windows","macox","javascript"];
+            var index = randomInt(0,paraules.length-1);
+            var paraula = paraules[index];
+
+            var lletresParaula = [];
+
+            for(var i=0; i<paraules.length; i++){
+                for(var j=0; j<this.lletres.length; j++){
+                    if(paraula[i]===this.lletres[j].valor){
+                        lletresParaula.push(this.lletres[j]);
+                    }
+                }
+            }
+
+            this.paraula = new Paraula(lletresParaula);
+
+        }
+
+        this.jugar=function(lletra){
+            //lletra = 'a','b','h'
+
+            var lletraSeleccionada;
+            for(var i=0; i<this.lletres.length; i++){
+                if(this.lletres[i].valor===lletra){
+                    lletraSeleccionada = this.lletres[i];
+                    break;
+                }
+            }
+            console.log(lletra,lletraSeleccionada)
+
+            var trobat = false;
+            for(var i=0; i<this.paraula.lletres.length; i++){
+                if(this.paraula.lletres[i].valor===lletraSeleccionada.valor){
+                    trobat = true;
+                    break;
+                }
+            }
+
+            if(trobat){
+                lletraSeleccionada.estat = "OK";
+            } else {
+                lletraSeleccionada.estat = "KO";
+            }
+        }
+
+        this.pintar=function(){
+            document.querySelector("#app").innerHTML='<div id="imatge"></div>'
+            document.querySelector("#app").innerHTML+='<div id="paraula"></div>'
+            document.querySelector("#app").innerHTML+='<div id="lletres"></div>'
+
+            //Pintar imatge
+            var numErrors = 0;
+            for(var i=0; i<this.lletres.length; i++){
+                if(this.lletres[i].estat==="KO"){
+                    numErrors++;
+                }
+            }
+            document.querySelector("#imatge").innerHTML='<img src="./img/'+(numErrors+1)+'.PNG">';
+
+            //Pintar paraula
+            document.querySelector("#paraula").innerHTML=this.paraula.pintar();
+
+            for(var i=0; i<this.lletres.length; i++){
+                document.querySelector("#lletres").appendChild(this.lletres[i].pintar())
+            }
+        }
+    }
+
+    var penjat = new Penjat();
+    penjat.init();
+    penjat.pintar();
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PENJAT</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+//Elements del programa
+var paraules=["pere","guillem","roser","cati"]
+var lletres=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 
+            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
+
+var paraula;
+var paraulaEncriptada=[];
+var numImatge = 1;
+
+//cream escenari
+var titol = document.createElement("h1");
+titol.id= titol;
+titol.innerText="EL JOC D'ENDEVINAR";
+document.querySelector("#app").appendChild(titol);
+
+var imatge = document.createElement("img");
+imatge.id= imatge;
+imatge.src="http://www.rondaulles.cat/daus/imatges/rondalles/XXII-4.png";
+imatge.width=200;
+document.querySelector("#app").appendChild(imatge);
+
+var divResultat = document.createElement("DIV");
+divResultat.id = "paraulaEncriptada";
+divResultat.style.textAlign='center';
+divResultat.style.margin='30px';
+divResultat.querySelector("#app").appendChild(divResultat);
+
+function pintarImatge(numImatge){
+    imatge.src="http://www.rondaulles.cat/daus/imatges/rondalles/XXII-4.png";
+}
+
+
+</script>
+</body>
+</html>

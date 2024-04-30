@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="init()">
+<div id="app"></div>
+<script>
+    var interval;
+    var app = document.querySelector("#app");
+
+    function init(){
+        var input = document.createElement("INPUT");
+        input.id="box";
+        input.addEventListener('input',function(){
+            document.querySelector("#countdown").innerHTML=this.value;
+        })
+        app.appendChild(input);
+
+        var boto = document.createElement("BUTTON");
+        boto.innerHTML="Go!";
+        boto.addEventListener('click',countdown);
+        app.appendChild(boto);
+
+        var div = document.createElement("DIV");
+        div.id='countdown';
+        div.style.textAlign='center';
+        app.appendChild(div);
+    }
+
+    function countdown(){
+        var numero = parseInt(document.querySelector('#box').value);
+        var ara = new Date();
+
+        if(isNaN(numero)){
+            clearInterval(interval);
+            document.querySelector("#countdown").innerHTML="Error";
+        } else {
+            //Evita solapaments de setInterval
+            clearInterval(interval);
+            interval = setInterval(function (){
+                var ara2 = new Date();
+                var diff = Math.abs(ara2-ara);
+                var dataDiff = new Date(diff);
+                console.log(dataDiff);
+                if((numero - dataDiff.getSeconds())>0){
+                    document.querySelector("#countdown").innerHTML = numero - dataDiff.getSeconds();
+                } else {
+                    console.log("sopresa");
+                    clearInterval(interval)
+                    document.querySelector("#countdown").innerHTML="SORPRESA!";
+                }
+            },100)
+        }
+    }
+</script>
+</body>
+</html>

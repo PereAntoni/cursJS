@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+var app = document.querySelector("#app");
+
+function Sorpresa(temps){
+    this.temps= temps;
+    this.activar = function(){
+
+    }
+
+
+    this.pintar= function(){
+        var missatge = document.createElement("p");
+        missatge.innerHTML+=this.temps;
+        console.log(this.temps);
+    }
+
+}
+
+function Boto(){
+    this.pinta = function(){
+        var boto = document.createElement("button");
+        console.log("som a boto");
+        boto.innerHTML="Go!";
+        app.appendChild(boto);
+    }
+}
+
+function Entrada(){
+    this.temps= temps;
+
+    this.pintar= function(){
+        var entrada = document.createElement("input");
+        entrada.id = "entrada";
+    
+    }
+
+}
+
+
+
+function Temporizador(){
+    this.temps;
+    this.pintar = function(){
+        console.log("pintar temporitzador");
+        document.querySelector("#app").innerHTML='<div id="entrada"></div>';
+        document.querySelector("#app").innerHTML+='<div id="boto"></div>';
+        document.querySelector("#app").innerHTML+='<div id="sorpresa"></div>';
+        var boto = new Boto();
+
+
+    }
+
+}
+var tempo = new Temporizador();
+tempo.pintar();
+</script>
+</body>
+</html>
