@@ -15,10 +15,14 @@
         </div>
     </header>
     <main id="cos">
+        <div id="formulari">
+
+        </div>
         
     </main>
 <script src="https://accounts.google.com/gsi/client?hl=fr" async></script>
 <script type="module">
+    import {PostService} from './js/service/PostService.js'
     import {idPostService} from './js/service/idPostService.js'
     //const  llistatPosts =  new idPostService();
 
@@ -26,11 +30,11 @@
         const titol = document.createElement("h1");
         titol.innerHTML="CURS ASBAPRIN API BLOGGER";
         document.querySelector("#capsalera").appendChild(titol);
-
-        const subTitol = document.createElement("h2");
-        subTitol.innerHTML="LLISTAT BLOGGER";
-        document.querySelector("#capsalera").appendChild(subTitol);
         
+        const subTitol = document.createElement("h2");
+        subTitol.innerHTML="FORM BLOGGER";
+        document.querySelector("#capsalera").appendChild(subTitol);
+
         const botoGoogle = document.createElement("button");
         botoGoogle.innerHTML="D=: API GOOGLE";
         botoGoogle.addEventListener('click',initGoogle);
@@ -41,10 +45,6 @@
         botoBlogger.addEventListener('click',initBlogger);
         document.querySelector("#capsalera").appendChild(botoBlogger);
     
-        const botoLlistatBlogger = document.createElement("button");
-        botoLlistatBlogger.innerHTML="D=: LLISTAT BLOGGER";
-        botoLlistatBlogger.addEventListener('click',llistatPosts);
-        document.querySelector("#capsalera").appendChild(botoLlistatBlogger);
 
         const botoInsertaPost = document.createElement("button");
         botoInsertaPost.innerHTML="D=: INSPOST";
@@ -53,10 +53,47 @@
         
 
     }
-   
-    function insertaPost(){
-        const nouPost = new idPostService();
-        nouPost.insertPost();
+    
+        
+    async function insertaPost(){
+        const nouPost = new PostService();
+        let post = await nouPost.insertPost();
+
+        const anterior = document.querySelector("#formulari");
+        if(anterior){anterior.remove()}
+        
+        const formulariPost = document.createElement("div");
+        formulariPost.id= "formulari";
+        document.querySelector("#cos").appendChild(formulariPost);
+
+        const labelidPost = document.createElement("label");
+        labelidPost.innerHTML= "ID:";
+        document.querySelector("#formulari").appendChild(labelidPost);
+        
+        const idPost = document.createElement("h3");
+        idPost.innerHTML= post.id;
+        document.querySelector("#formulari").appendChild(idPost);
+
+        const labelTitol = document.createElement("label");
+        labelTitol.innerHTML= "TITOL:";
+        document.querySelector("#formulari").appendChild(labelTitol);
+        
+        const titolPost = document.createElement("textarea");
+        titolPost.value= post.id;
+        document.querySelector("#formulari").appendChild(titolPost);
+
+        const labelText = document.createElement("label");
+        labelText.innerHTML= "TEXT:";
+        document.querySelector("#formulari").appendChild(labelText);
+        
+
+        const textPost = document.createElement("textarea");
+        textPost.value= post.id;
+        document.querySelector("#formulari").appendChild(textPost);
+
+        const botoUpdate = document.createElement("button");
+        botoUpdate.value= post.id;
+        document.querySelector("#formulari").appendChild(botoUpdate);
     }
 
     
@@ -105,90 +142,15 @@
     }
 
     
-
     
-    pintarCapsalera();
-    pintarCos();
 
-    async function llistatPosts(){
-        const  llistatPosts =  new idPostService();
-        let llista = await llistatPosts.getPosts();
-        console.log("llista: " + llista.length)
-        //console.log(llistatPosts.mostra())
-        //llistatPosts.deletePost(1);
-        //console.log("llPosts: " + llistatPosts.getLlistat)
-
-        const anterior = document.querySelector("table");
-        if(anterior){anterior.remove()}
+   
+    (()=>{
+        const post = new PostService();
         
-
-
-        const taula = document.createElement("TABLE");
-        const trHeader = taula.insertRow(0);
-
-        const thId = trHeader.insertCell(0);
-        thId.appendChild(document.createTextNode('id'));
-        trHeader.appendChild(thId);
-
-        const thTitol = trHeader.insertCell(1);
-        thTitol.appendChild(document.createTextNode('títol'));
-        trHeader.appendChild(thTitol);
-
-        const thData = trHeader.insertCell(2);
-        thData.appendChild(document.createTextNode('data Creació'));
-        trHeader.appendChild(thData);
-
-        const thEdita = trHeader.insertCell(3);
-        thEdita.appendChild(document.createTextNode('Editar'));
-        trHeader.appendChild(thEdita);
-
-        const thEsborra = trHeader.insertCell(3);
-        thEsborra.appendChild(document.createTextNode('Esborrar'));
-        trHeader.appendChild(thEsborra);
-
+        pintarCapsalera();
         
-
-        for(const post of llista){
-            const trHeader = taula.insertRow(-1);
-
-            const trId = trHeader.insertCell(0);
-            trId.appendChild(document.createTextNode(post.id));
-            trHeader.appendChild(trId);
-
-            const trTitol = trHeader.insertCell(1);
-            trTitol.appendChild(document.createTextNode(post.titol));
-            trHeader.appendChild(trTitol);
-
-            const trData = trHeader.insertCell(2);
-            trData.appendChild(document.createTextNode(post.data));
-            trHeader.appendChild(trData);
-
-            const trEditar = trHeader.insertCell(3);
-            const botoEditar = document.createElement("button");
-            botoEditar.appendChild(document.createTextNode("Editar"));
-            botoEditar.addEventListener('click',function(){
-                window.open("bloggerForm.html");
-            })
-            trEditar.appendChild(botoEditar);
-            
-            
-            
-            const trEsborrar = trHeader.insertCell(4);
-            const botoEsborrar = document.createElement("button");
-            botoEsborrar.appendChild(document.createTextNode("Esborrar"));
-            botoEsborrar.addEventListener('click',function(){
-                if (confirm("Vols esborrar el post " + post.titol)){
-                    console.log(post.id)
-                    llistatPosts.deletePost(post.id)
-                }else{
-                    alert("No")
-                }
-            })
-            trEsborrar.appendChild(botoEsborrar);
-        }
-        document.querySelector("#cos").appendChild(taula);
-    }
-
+    })()
 </script>
 </body>
 
