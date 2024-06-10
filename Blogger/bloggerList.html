@@ -43,12 +43,16 @@
     
         const botoLlistatBlogger = document.createElement("button");
         botoLlistatBlogger.innerHTML="D=: LLISTAT BLOGGER";
-        botoLlistatBlogger.addEventListener('click',llistatPosts);
+        botoLlistatBlogger.addEventListener('click',function(){
+            window.location.href='bloggerList.html';
+        });
         document.querySelector("#capsalera").appendChild(botoLlistatBlogger);
 
         const botoInsertaPost = document.createElement("button");
         botoInsertaPost.innerHTML="D=: INSPOST";
-        botoInsertaPost.addEventListener('click',insertaPost);
+        botoInsertaPost.addEventListener('click',function(){
+            window.location.href='bloggerForm.html';
+        });
         document.querySelector("#capsalera").appendChild(botoInsertaPost);
         
 
@@ -57,6 +61,7 @@
     function insertaPost(){
         const nouPost = new idPostService();
         nouPost.insertPost();
+        console.log("id:"+nouPost.id)
     }
 
     
@@ -107,12 +112,11 @@
     
 
     
-    pintarCapsalera();
-    pintarCos();
+    
 
     async function llistatPosts(){
-        const  llistatPosts =  new idPostService();
-        let llista = await llistatPosts.getPosts();
+        const  lPosts =  new idPostService();
+        let llista = await lPosts.getPosts();
         console.log("llista: " + llista.length)
         //console.log(llistatPosts.mostra())
         //llistatPosts.deletePost(1);
@@ -133,6 +137,10 @@
         const thTitol = trHeader.insertCell(1);
         thTitol.appendChild(document.createTextNode('títol'));
         trHeader.appendChild(thTitol);
+
+        const thUrl = trHeader.insertCell(1);
+        thUrl.appendChild(document.createTextNode('url'));
+        trHeader.appendChild(thUrl);
 
         const thData = trHeader.insertCell(2);
         thData.appendChild(document.createTextNode('data Creació'));
@@ -159,15 +167,22 @@
             trTitol.appendChild(document.createTextNode(post.titol));
             trHeader.appendChild(trTitol);
 
-            const trData = trHeader.insertCell(2);
+            const trUrl = trHeader.insertCell(2);
+            const linkUrl = document.createElement("a");
+            linkUrl.setAttribute("href",post.url);
+            linkUrl.appendChild(document.createTextNode(post.url));
+            trUrl.appendChild(linkUrl);
+            trHeader.appendChild(trUrl);
+
+            const trData = trHeader.insertCell(3);
             trData.appendChild(document.createTextNode(post.data));
             trHeader.appendChild(trData);
 
-            const trEditar = trHeader.insertCell(3);
+            const trEditar = trHeader.insertCell(4);
             const botoEditar = document.createElement("button");
             botoEditar.appendChild(document.createTextNode("Editar"));
             botoEditar.addEventListener('click',function(){
-                window.open("bloggerForm.html");
+                window.open("bloggerForm.html?idPost="+post.id);
             })
             trEditar.appendChild(botoEditar);
             
@@ -177,9 +192,9 @@
             const botoEsborrar = document.createElement("button");
             botoEsborrar.appendChild(document.createTextNode("Esborrar"));
             botoEsborrar.addEventListener('click',function(){
-                if (confirm("Vols esborrar el post " + post.titol)){
+                if (confirm("Vols esborrar el post " + post.id + "," + post.titol )){
                     console.log(post.id)
-                    llistatPosts.deletePost(post.id)
+                    borraActualitza(lPosts,post)
                 }else{
                     alert("No")
                 }
@@ -188,6 +203,15 @@
         }
         document.querySelector("#cos").appendChild(taula);
     }
+
+    async function borraActualitza(l,post){
+        await l.deletePost(post.id);
+        await llistatPosts();
+    }
+    (async ()=>{
+        pintarCapsalera();
+        await llistatPosts(); 
+    })()
 
 </script>
 </body>

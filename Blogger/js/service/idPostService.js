@@ -48,23 +48,27 @@ export class idPostService{
         Authorization: 
         */
         console.log("ENTRAT A BORRAR: "+ postId)
-        console.log(postId)
-        fetch("https://www.googleapis.com/blogger/v3/blogs/5061924546610576807/posts/"+postId,{
+        
+        const borra = "https://www.googleapis.com/blogger/v3/blogs/5061924546610576807/posts/" + postId; 
+        console.log(borra)
+        fetch(borra,{
             method: 'delete',
             headers: {
                 //'Authorization': localStorage.getItem('token')
-                'Authorization': 'Bearer '+localStorage.getItem('token')
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
             }
         
         })
+        .then (r=>console.log(r))
     }
 
     #fromJSON(json){
         return new IdPost(
             json.id,
             json.title,
-            json.published
-        )
+            json.published,
+            json.url
+            )
     }
 
     getLlista(){
@@ -99,6 +103,7 @@ export class idPostService{
             headers: {
                 //'Authorization': localStorage.getItem('token')
                 'Authorization': 'Bearer '+localStorage.getItem('token')
+            
             }
         
         })
