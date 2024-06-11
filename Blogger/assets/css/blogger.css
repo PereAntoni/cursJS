@@ -1,26 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+header{
+    text-align: center;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-header {
-    text-align: center;
-}
-
-header img {
-    width: 200px;
-    height: auto;
-    margin: 10px;
-}
-
 body {
    
     padding: 2vw;
     margin-bottom: 5vh;
+    border-radius: 4px;
     font-family: 'Roboto', sans-serif;
-}
+}   
 
 main {
     background-color: rgba(255, 255, 255, 0.9);
@@ -28,67 +24,74 @@ main {
     border-radius: 4px;
 }
 
-main>aside {
-    order: 1;
-    flex-grow: 1;
-    padding: 20px;
-    width: 150px;
-}
-
-main>section{
-    order: 2;
-    flex-grow: 5;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-main>section>div:first-child{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-table, div{
+main>#formulari{
+    background-color: rgba(80, 117, 132, 0.172);
+    padding: 10px;
+    align-self:center;
     width: 100%;
 }
 
-table,tr,td,th{
-    border: solid 1px black;
-    border-collapse: collapse;
+#llistatPosts{
+    width: 100%;
+    padding: 12px 20px;
 }
 
 td,th{
-    padding: 10px 5px;
+    border: solid, 1px, black;
+    padding: 10px;
 }
 
-table tr td:last-child{
-    font-weight: 400;
-    color: #0a3d91;
-}
 
-table tr:first-child td,table tr:first-child th{
-    font-weight: bold;
-    background-color: #CCC;
-    color: black !important;
-}
+#llistatPosts tr:nth-child(even)
+    {background-color: #ede47a;}
 
-#select{
-    display: flex;
-    flex-direction: column;
-}
-
-#dates{
+input,textarea{
     width: 100%;
-    height: 50vh;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-#paginacio{
-    display: flex;
-    justify-content: flex-end;
+#costatEsquerra,#costatDreta{
+    width: 30%;
+}
+
+button{
+    /* Color: d32f2f */
+    background-color: #cad621;
+    border: none;
+    color: rgb(44, 24, 24);
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    transition-duration: 0.8s;
+    cursor :pointer;
+    align-self: right;
+    border-radius: 4px;
+    border: solid, black,1px;
+}
+
+#formulari>div>button{
+    width:100%;
+    margin-bottom: 10px;
+}
+
+#formulari>div>input,textarea{
+    font-size: 16px;
+}
+
+#formulari>div>textarea{
+    font-size: 16px;
+    row-gap: 30;
 }
 
 
 
-
-
+button:hover{
+    background-color: #ecfa4e;
+}

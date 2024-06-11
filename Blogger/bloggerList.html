@@ -122,19 +122,33 @@
         //llistatPosts.deletePost(1);
         //console.log("llPosts: " + llistatPosts.getLlistat)
 
+        
+
         const anterior = document.querySelector("table");
         if(anterior){anterior.remove()}
         
+        const anteriorEsquerra = document.querySelector("#costatEsquerra");
+        if(anteriorEsquerra){anteriorEsquerra.remove()}
+
+        const anteriorDreta = document.querySelector("#costatDreta");
+        if(anteriorDreta){anteriorDreta.remove()}
 
 
-        const taula = document.createElement("TABLE");
+
+        const costatEsquerra = document.createElement("div");
+        
+        costatEsquerra.id= "costatEsquerra";
+        document.querySelector("#cos").appendChild(costatEsquerra);
+
+
+        const taula = document.createElement("table");
         const trHeader = taula.insertRow(0);
-
-        const thId = trHeader.insertCell(0);
+        taula.id="llistatPosts"
+        /*const thId = trHeader.insertCell(0);
         thId.appendChild(document.createTextNode('id'));
-        trHeader.appendChild(thId);
+        trHeader.appendChild(thId);*/
 
-        const thTitol = trHeader.insertCell(1);
+        const thTitol = trHeader.insertCell(0);
         thTitol.appendChild(document.createTextNode('títol'));
         trHeader.appendChild(thTitol);
 
@@ -142,15 +156,15 @@
         thUrl.appendChild(document.createTextNode('url'));
         trHeader.appendChild(thUrl);
 
-        const thData = trHeader.insertCell(2);
+        /*const thData = trHeader.insertCell(2);
         thData.appendChild(document.createTextNode('data Creació'));
-        trHeader.appendChild(thData);
+        trHeader.appendChild(thData);*/
 
-        const thEdita = trHeader.insertCell(3);
+        const thEdita = trHeader.insertCell(2);
         thEdita.appendChild(document.createTextNode('Editar'));
         trHeader.appendChild(thEdita);
 
-        const thEsborra = trHeader.insertCell(3);
+        const thEsborra = trHeader.insertCell(2);
         thEsborra.appendChild(document.createTextNode('Esborrar'));
         trHeader.appendChild(thEsborra);
 
@@ -159,26 +173,26 @@
         for(const post of llista){
             const trHeader = taula.insertRow(-1);
 
-            const trId = trHeader.insertCell(0);
+            /*const trId = trHeader.insertCell(0);
             trId.appendChild(document.createTextNode(post.id));
-            trHeader.appendChild(trId);
+            trHeader.appendChild(trId);*/
 
-            const trTitol = trHeader.insertCell(1);
+            const trTitol = trHeader.insertCell(0);
             trTitol.appendChild(document.createTextNode(post.titol));
             trHeader.appendChild(trTitol);
 
-            const trUrl = trHeader.insertCell(2);
+            const trUrl = trHeader.insertCell(1);
             const linkUrl = document.createElement("a");
             linkUrl.setAttribute("href",post.url);
             linkUrl.appendChild(document.createTextNode(post.url));
             trUrl.appendChild(linkUrl);
             trHeader.appendChild(trUrl);
 
-            const trData = trHeader.insertCell(3);
+           /* const trData = trHeader.insertCell(3);
             trData.appendChild(document.createTextNode(post.data));
-            trHeader.appendChild(trData);
+            trHeader.appendChild(trData);*/
 
-            const trEditar = trHeader.insertCell(4);
+            const trEditar = trHeader.insertCell(2);
             const botoEditar = document.createElement("button");
             botoEditar.appendChild(document.createTextNode("Editar"));
             botoEditar.addEventListener('click',function(){
@@ -188,7 +202,7 @@
             
             
             
-            const trEsborrar = trHeader.insertCell(4);
+            const trEsborrar = trHeader.insertCell(3);
             const botoEsborrar = document.createElement("button");
             botoEsborrar.appendChild(document.createTextNode("Esborrar"));
             botoEsborrar.addEventListener('click',function(){
@@ -201,13 +215,20 @@
             })
             trEsborrar.appendChild(botoEsborrar);
         }
-        document.querySelector("#cos").appendChild(taula);
+            document.querySelector("#cos").appendChild(taula);
+            
+            const costatDreta = document.createElement("div");
+            costatDreta.id= "costatDreta";
+            document.querySelector("#cos").appendChild(costatDreta);
+        
     }
+
 
     async function borraActualitza(l,post){
         await l.deletePost(post.id);
         await llistatPosts();
     }
+    
     (async ()=>{
         pintarCapsalera();
         await llistatPosts(); 

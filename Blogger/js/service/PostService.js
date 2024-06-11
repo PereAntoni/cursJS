@@ -107,6 +107,28 @@ export class PostService{
         .then (r=>console.log(r))
     }
 
+    async traduirPost(texte,de,a){
+        const peticioFetch = await fetch("https://theteacher.codiblau.com/public/google/translate",{
+            method: 'post',
+            headers: {
+                //'Authorization': localStorage.getItem('token')
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                languageFrom: de,
+                languageTo: a,
+                text: texte
+            })
+            
+        
+        })
+        this.traduccio = await peticioFetch.text();
+        //console.log(r.json())
+        
+        console.log(this.traduccio)
+        return this.traduccio; 
+    }
+
     
     
 }

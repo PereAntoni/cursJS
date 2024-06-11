@@ -16,7 +16,7 @@
     </header>
     <main id="cos">
         <div id="formulari">
-
++
         </div>
         
     </main>
@@ -128,62 +128,128 @@
 
     async function updatePost(){
         const idPost = document.querySelector("#idPost").innerHTML;
-        const titol = document.querySelector("#titol").value
+        const titol = document.querySelector("#titolPostTraduit").value
         const text = document.querySelector("#text").value;
         console.log("Entrat a actualitzar");
         console.log("id: " + idPost)
         console.log("titol: " + titol);
-        console.log("text" + text);
+        const inputTraduccio = document.querySelector("#traduccio").value
+        const inputText = document.querySelector("#text").value
+        
         const p = new PostService();
-        p.setPost(idPost,titol,text);
+        p.setPost(idPost,titol,inputTraduccio);
         let pt = await p.updatePost();
 
     }
     
+    async function traduirPost(){
+        console.log("ENTRAT A TRADUCCIO")
+        const p = new PostService();
+        const inputTraduccio = document.querySelector("#traduccio")
+        const inputText = document.querySelector("#text").value
+        console.log(inputText)
+        inputTraduccio.value = await p.traduirPost(inputText,"ca","en");
 
-    function pintarPost(p){
+        const titolPostTraduit = document.querySelector("#titolPostTraduit")
+        const inputTextTitol = document.querySelector("#titol").value
+        console.log(inputText)
+        titolPostTraduit.value = await p.traduirPost(inputTextTitol,"ca","en");
+    }
+
+    async function pintarPost(p){
+        const pt = new PostService();
 
         const anterior = document.querySelector("#formulari");
         if(anterior){anterior.remove()}
         
+        const costatEsquerra = document.createElement("div");
+        costatEsquerra.id= "costatEsquerra";
+        document.querySelector("#cos").appendChild(costatEsquerra);
+
+
         const formulariPost = document.createElement("div");
         formulariPost.id= "formulari";
         document.querySelector("#cos").appendChild(formulariPost);
 
-        const labelidPost = document.createElement("label");
-        labelidPost.innerHTML= "ID:";
-        document.querySelector("#formulari").appendChild(labelidPost);
+        const divIdPost = document.createElement("div");
+        divIdPost.id="divIdPost"
+        document.querySelector("#formulari").appendChild(divIdPost);
         
-        const idPost = document.createElement("h3");
+        const idPost = document.createElement("p");
         idPost.setAttribute('id','idPost');
         idPost.innerHTML=  p.id;
-        document.querySelector("#formulari").appendChild(idPost);
+        document.querySelector("#divIdPost").appendChild(idPost);
+
+        const divTitol = document.createElement("div");
+        divTitol.id="divTitol"
+        document.querySelector("#formulari").appendChild(divTitol);
 
         const labelTitol = document.createElement("label");
         labelTitol.innerHTML= "TITOL:";
-        document.querySelector("#formulari").appendChild(labelTitol);
+        document.querySelector("#divTitol").appendChild(labelTitol);
         
-        const titolPost = document.createElement("textarea");
+        const titolPost = document.createElement("input");
         titolPost.setAttribute('id','titol');
-        titolPost.value = p.titol;
-        document.querySelector("#formulari").appendChild(titolPost);
+        titolPost.value = await pt.traduirPost(p.titol,"en","ca");
+        document.querySelector("#divTitol").appendChild(titolPost);
+
+        const divTitolTraduit = document.createElement("div");
+        divTitolTraduit.id="divTitolTraduit"
+        document.querySelector("#formulari").appendChild(divTitolTraduit);
+
+        const labelTitolTraduit = document.createElement("label");
+        labelTitolTraduit.innerHTML= "TITOL TRADUCCIÓ::";
+        document.querySelector("#divTitol").appendChild(labelTitolTraduit);
+        
+        const titolPostTraduit = document.createElement("input");
+        titolPostTraduit.setAttribute('id','titolPostTraduit');
+        titolPostTraduit.value = p.titol;
+        document.querySelector("#divTitol").appendChild(titolPostTraduit);
+
+        const divText = document.createElement("div");
+        divText.id="divText"
+        document.querySelector("#formulari").appendChild(divText);
 
         const labelText = document.createElement("label");
         labelText.innerHTML= "TEXT:";
-        document.querySelector("#formulari").appendChild(labelText);
+        document.querySelector("#divText").appendChild(labelText);
         
 
         const textPost = document.createElement("textarea");
         textPost.setAttribute('id','text');
-        textPost.value= p.contingut;
-        document.querySelector("#formulari").appendChild(textPost);
+        textPost.value= await pt.traduirPost(p.contingut,"en","ca");;
+        document.querySelector("#divText").appendChild(textPost);
+        
+        const divTraduccio = document.createElement("div");
+        divTraduccio.id="divTraduccio"
+        document.querySelector("#formulari").appendChild(divTraduccio);
+        
+        const labelTraduccio = document.createElement("label");
+        labelTraduccio.innerHTML= "TRADUCCIO:";
+        document.querySelector("#divTraduccio").appendChild(labelTraduccio);
 
+        const traduccioPost = document.createElement("textarea");
+        traduccioPost.setAttribute('id','traduccio');
+        traduccioPost.value= p.contingut;
+        document.querySelector("#divTraduccio").appendChild(traduccioPost);
+
+        const botoTraduccio = document.createElement("button");
+        botoTraduccio.innerHTML= "traduir post";
+        botoTraduccio.addEventListener('click',traduirPost)
+        document.querySelector("#divTraduccio").appendChild(botoTraduccio);
+        
         const botoUpdate = document.createElement("button");
         botoUpdate.innerHTML= "actualitza post";
         botoUpdate.addEventListener('click',updatePost)
-        document.querySelector("#formulari").appendChild(botoUpdate);
+        document.querySelector("#divTraduccio").appendChild(botoUpdate);
+
+        const costatDreta = document.createElement("div");
+        costatDreta.id= "costatDreta";
+        document.querySelector("#cos").appendChild(costatDreta);
+
     }
 
+    
    
     (async()=>{
         let post = new PostService();
